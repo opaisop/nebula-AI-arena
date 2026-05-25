@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEBULA // AI Model Arena & Comparison Hub (May 2026)</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background decorative light blobs (Glassmorphism aesthetics) -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="header-logo-container">
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <h1>NEBULA</h1>
+        <span class="logo-subtitle">AI Arena &bull; May 2026 Edition</span>
+      </div>
+    </div>
+
+    <!-- Live Stats Ticker -->
+    <div class="stats-ticker-container desktop-only">
+      <div class="ticker-track">
+        <span class="ticker-item"><span class="ticker-bullet green"></span> Latest release: Meta Muse Spark</span>
+        <span class="ticker-item"><span class="ticker-bullet blue"></span> Google Gemini 3.5 Flash launched May 19</span>
+        <span class="ticker-item"><span class="ticker-bullet purple"></span> DeepSeek-V4-Pro leads price performance</span>
+      </div>
+    </div>
+
+    <!-- Theme Switcher & Utility Actions -->
+    <div class="header-actions">
+      <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme">
+        <!-- Sun Icon (shown in dark mode to switch to light) -->
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (shown in light mode to switch to dark) -->
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <button id="tour-toggle-btn" class="btn btn-secondary tour-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Code Structure</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive Developer Tour Panel (Beginner Friendly Explanation) -->
+  <aside id="developer-tour" class="dev-tour-drawer hidden">
+    <div class="drawer-header">
+      <h3>Beginner Developer Guide</h3>
+      <button id="close-tour-btn" class="btn-close" aria-label="Close Guide">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <p class="guide-intro">Welcome! This application is designed with an clean, modular, and beginner-friendly structure. Click the files below to see how they connect:</p>
+      
+      <div class="accordion-item">
+        <h4 class="accordion-header">
+          <span class="file-badge badge-html">HTML</span> index.html
+        </h4>
+        <div class="accordion-panel">
+          <p>Defines the dashboard's layout using modern HTML5 tags. Dynamic containers like the grid of cards, comparison fields, and cost estimators are created with unique IDs so that JavaScript can insert data on the fly.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h4 class="accordion-header">
+          <span class="file-badge badge-css">CSS</span> style.css
+        </h4>
+        <div class="accordion-panel">
+          <p>Controls the entire look and feel. Utilizes CSS variables (e.g. <code>--bg-primary</code>) to enable seamless theme switching. Features a glassmorphism theme using backdrop blurs and subtle glows, combined with responsive CSS Grid layouts.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h4 class="accordion-header">
+          <span class="file-badge badge-js">DATA</span> models-data.js
+        </h4>
+        <div class="accordion-panel">
+          <p>A structured database in memory. Storing metadata, prices, capabilities, and strengths in an array of objects keeps the layout separated from the information, making it extremely easy to update pricing.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h4 class="accordion-header">
+          <span class="file-badge badge-js">JS</span> app.js
+        </h4>
+        <div class="accordion-panel">
+          <p>The operational logic. It listens for user events (theme toggling, inputting text in search, dragging sliders, selecting cards for comparison) and updates the website UI instantly using pure Vanilla JavaScript.</p>
+        </div>
+      </div>
+
+      <div class="guide-flow">
+        <h5>How the Data Flows:</h5>
+        <div class="flow-step">1. <code>models-data.js</code> holds the values.</div>
+        <div class="flow-step">2. <code>app.js</code> filters and performs math (e.g., cost estimates).</div>
+        <div class="flow-step">3. <code>index.html</code> receives the generated layouts.</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Container -->
+  <main class="app-main">
+    
+    <!-- Tab Navigation Bar -->
+    <nav class="navigation-tabs-bar">
+      <button class="tab-btn active" data-target="overview">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9"></rect>
+          <rect x="14" y="3" width="7" height="5"></rect>
+          <rect x="14" y="12" width="7" height="9"></rect>
+          <rect x="3" y="16" width="7" height="5"></rect>
+        </svg>
+        <span>Model Grid</span>
+      </button>
+      <button class="tab-btn" data-target="compare" id="nav-compare-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 3h5v5"></path>
+          <path d="M8 3H3v5"></path>
+          <path d="M12 2v20"></path>
+          <path d="m3 21 9-9 9 9"></path>
+        </svg>
+        <span>Head-to-Head</span>
+        <span class="badge-count hidden" id="compare-count-badge">0</span>
+      </button>
+      <button class="tab-btn" data-target="calculator">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+          <line x1="8" y1="6" x2="16" y2="6"></line>
+          <line x1="16" y1="14" x2="16" y2="18"></line>
+          <path d="M16 10h.01"></path>
+          <path d="M12 10h.01"></path>
+          <path d="M8 10h.01"></path>
+          <path d="M12 14h.01"></path>
+          <path d="M8 14h.01"></path>
+          <path d="M12 18h.01"></path>
+          <path d="M8 18h.01"></path>
+        </svg>
+        <span>Cost Estimator</span>
+      </button>
+      <button class="tab-btn" data-target="radar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <line x1="12" y1="2" x2="12" y2="22"></line>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+        </svg>
+        <span>Capabilities Radar</span>
+      </button>
+    </nav>
+
+    <!-- CONTENT SECTIONS -->
+
+    <!-- Methodology & Limitations Disclaimer Callout -->
+    <div class="methodology-banner glass-panel">
+      <div class="banner-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <h4>Ecosystem Evaluation Note & Methodology</h4>
+      </div>
+      <div class="banner-grid">
+        <div class="banner-item">
+          <strong>Benchmark Variance</strong>
+          <span>Performance varies heavy by benchmark. Optimization templates can skew outcomes; live applications may behave differently.</span>
+        </div>
+        <div class="banner-item">
+          <strong>Coding Agent Setups</strong>
+          <span>Outcome is strongly affected by agent loops and retrieval systems. Single-file scores do not predict SWE-bench success.</span>
+        </div>
+        <div class="banner-item">
+          <strong>Latency Constraints</strong>
+          <span>Speed matters. Opus-tier and reasoning models offer deeper logic but sacrifice fast generation response times.</span>
+        </div>
+        <div class="banner-item">
+          <strong>Value vs. Intelligence</strong>
+          <span>Pricing tiers affect selection. For high-volume classification, Flash models offer up to 50x better value-efficiency.</span>
+        </div>
+      </div>
+      <p class="banner-footer">*Ratings shown are subjective estimates and aggregated benchmark scores. Subjective comparisons should not be treated as absolute facts. Confidence metrics are marked individually.</p>
+    </div>
+
+    <!-- Section 1: Overview Grid -->
+    <section id="panel-overview" class="tab-panel active">
+      
+      <!-- Filters and Search Toolbar -->
+      <div class="toolbar-container">
+        <!-- Search bar -->
+        <div class="search-box-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search by model name, creator, or features...">
+        </div>
+
+        <!-- Filter and Sorting Dropdowns -->
+        <div class="filters-wrapper">
+          <div class="filter-group">
+            <label for="filter-provider">Provider</label>
+            <select id="filter-provider">
+              <option value="all">All Providers</option>
+              <option value="OpenAI">OpenAI</option>
+              <option value="Anthropic">Anthropic</option>
+              <option value="Google">Google</option>
+              <option value="DeepSeek">DeepSeek</option>
+              <option value="xAI">xAI</option>
+              <option value="Meta">Meta</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-tier">Tier</label>
+            <select id="filter-tier">
+              <option value="all">All Tiers</option>
+              <option value="Flagship">Flagship (High IQ)</option>
+              <option value="Reasoning">Reasoning (Logic/Math)</option>
+              <option value="Fast">Fast & Lightweight</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="sort-by">Sort By</label>
+            <select id="sort-by">
+              <option value="default">Release Date</option>
+              <option value="coding">Coding Rating</option>
+              <option value="reasoning">Reasoning Rating</option>
+              <option value="speed">Speed Rating</option>
+              <option value="price-low">Lowest Cost</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Compare Basket (Floats at bottom if items selected) -->
+      <div id="compare-basket" class="compare-basket hidden">
+        <div class="basket-text">
+          <span class="basket-count" id="basket-count-text">0 selected</span>
+          <span class="basket-sub">models picked for Head-to-Head Arena</span>
+        </div>
+        <div class="basket-actions">
+          <button id="clear-basket-btn" class="btn btn-link">Clear</button>
+          <button id="trigger-compare-btn" class="btn btn-primary">Compare Now</button>
+        </div>
+      </div>
+
+      <!-- Models Dynamic Cards Grid -->
+      <div id="models-grid" class="models-grid-container">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Section 2: Head-to-Head Compare -->
+    <section id="panel-compare" class="tab-panel">
+      <div class="section-header">
+        <h2>Head-to-Head Comparison Arena</h2>
+        <p>Select any two models to analyze their capabilities side-by-side and find the winner.</p>
+      </div>
+
+      <!-- Dual Dropdowns for Picking Models -->
+      <div class="comparison-selectors-row">
+        <div class="selector-card glass-panel">
+          <label for="compare-select-a">Model A (Primary)</label>
+          <select id="compare-select-a" class="compare-select">
+            <!-- Rendered dynamically -->
+          </select>
+        </div>
+
+        <div class="vs-divider">VS</div>
+
+        <div class="selector-card glass-panel">
+          <label for="compare-select-b">Model B (Challenger)</label>
+          <select id="compare-select-b" class="compare-select">
+            <!-- Rendered dynamically -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Action Row to copy results -->
+      <div style="display: flex; justify-content: center; margin-bottom: 24px;">
+        <button id="copy-compare-btn" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy Arena Results</span>
+        </button>
+      </div>
+
+      <!-- Comparison Dynamic Table Content -->
+      <div id="compare-results-container" class="compare-results-wrapper">
+        <!-- Generated Dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- Section 3: Cost Estimator -->
+    <section id="panel-calculator" class="tab-panel">
+      <div class="section-header">
+        <h2>Token Cost Estimator</h2>
+        <p>Estimate and compare monthly operational API expenses based on volume and caching efficiency.</p>
+      </div>
+
+      <div class="calculator-grid">
+        <!-- Sliders Box -->
+        <div class="calculator-controls glass-panel">
+          <h3>Simulated Monthly Volume</h3>
+          
+          <div class="slider-group">
+            <div class="slider-labels">
+              <span>Input Tokens (M)</span>
+              <span id="label-input-tokens">10M</span>
+            </div>
+            <input type="range" id="slider-input-tokens" min="0.1" max="100" step="0.5" value="10">
+            <span class="slider-hint">Prompt text sent to the model (Instructions, files, context).</span>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-labels">
+              <span>Output Tokens (M)</span>
+              <span id="label-output-tokens">5M</span>
+            </div>
+            <input type="range" id="slider-output-tokens" min="0.1" max="100" step="0.5" value="5">
+            <span class="slider-hint">Model's generated text responses. (Typically more expensive).</span>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-labels">
+              <span>Prompt Caching Cache Hit Rate</span>
+              <span id="label-cache-rate">40%</span>
+            </div>
+            <input type="range" id="slider-cache-rate" min="0" max="100" step="5" value="40">
+            <span class="slider-hint">Repeated structures (like system instructions) that benefit from cached token discounts.</span>
+          </div>
+        </div>
+
+        <!-- Calculated Costs Table & Summary -->
+        <div class="calculator-results glass-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; margin-bottom: 24px;">
+            <h3 style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">Calculated Monthly Estimates</h3>
+            <button id="copy-costs-btn" class="btn btn-secondary" style="padding: 6px 12px; font-size: 11px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Costs</span>
+            </button>
+          </div>
+          <div class="calculator-table-wrapper">
+            <table class="cost-comparison-table">
+              <thead>
+                <tr>
+                  <th>Model & Creator</th>
+                  <th>Pricing details</th>
+                  <th class="text-right">Estimated Cost / Month</th>
+                </tr>
+              </thead>
+              <tbody id="cost-estimates-tbody">
+                <!-- Calculated dynamically -->
+              </tbody>
+            </table>
+          </div>
+          <p class="cost-disclaimer">*Estimates assume basic standard processing tiers. Caching discount rates vary by provider (DeepSeek offers up to 98% discount on hit, Anthropic 90%, OpenAI 50%). Meta Muse Spark currently operates in a free consumer tier; API rates are estimated.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Capabilities Radar -->
+    <section id="panel-radar" class="tab-panel">
+      <div class="section-header">
+        <h2>Capabilities Compare & Ratings</h2>
+        <p>Rank and cross-compare specific performance scores across all standard evaluation vectors.</p>
+      </div>
+
+      <div class="radar-page-layout">
+        <!-- Left Column: Metrics selector and comparative bar chart -->
+        <div class="radar-chart-container glass-panel">
+          <div class="radar-selector-header">
+            <h3>Capability Leaderboard</h3>
+            <div class="radar-metric-pills" id="radar-metric-pills">
+              <button class="pill active" data-metric="coding">Coding</button>
+              <button class="pill" data-metric="reasoning">Reasoning</button>
+              <button class="pill" data-metric="creative">Creative Writing</button>
+              <button class="pill" data-metric="speed">Latency / Speed</button>
+              <button class="pill" data-metric="multimodal">Multimodal</button>
+            </div>
+          </div>
+
+          <div class="leaderboard-bars" id="radar-leaderboard-bars">
+            <!-- Dynamic comparison bars rendered via app.js -->
+          </div>
+        </div>
+
+        <!-- Right Column: Specs Table Checklist -->
+        <div class="radar-specs-container glass-panel">
+          <h3>Model Feature Checklist</h3>
+          <div class="specs-table-wrapper">
+            <table class="specs-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Context Window</th>
+                  <th>Modality</th>
+                  <th>Access Type</th>
+                </tr>
+              </thead>
+              <tbody id="specs-table-tbody">
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Detailed Modal for Expanded Card Info -->
+  <div id="details-modal" class="modal-overlay hidden">
+    <div class="modal-box glass-panel">
+      <button id="modal-close-btn" class="modal-close-x">&times;</button>
+      <div class="modal-content-body" id="modal-body-content">
+        <!-- Rendered dynamically in app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer section -->
+  <footer class="app-footer">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <h3>NEBULA Model Arena</h3>
+        <p>An interactive dashboard showcasing AI pricing structures, token math, capabilities ratings, and technical comparisons. Structured with beginner-friendly modular concepts.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Dashboard Modules</h4>
+        <ul>
+          <li><span class="file-link">index.html</span> - Interface Structure</li>
+          <li><span class="file-link">style.css</span> - Glassmorphic Theme</li>
+          <li><span class="file-link">models-data.js</span> - May 2026 Raw DB</li>
+          <li><span class="file-link">app.js</span> - Dynamic Engine</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nebula AI Arena. Built for developers. Real-time specifications cached May 2026.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="models-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
