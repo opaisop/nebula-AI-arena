@@ -1,6 +1,6 @@
 # 🌌 NEBULA // AI Model Arena & Comparison Hub
 
-NEBULA is a clean, modern, and highly interactive dashboard designed to compare major AI models (such as OpenAI's GPT-4o/o3-mini, Anthropic's Claude Sonnet/Opus, Google's Gemini 3.5 Flash, xAI's Grok 4.3, DeepSeek's V4-Pro, and Meta's Muse Spark).
+NEBULA is a clean, modern, and highly interactive dashboard designed to compare major AI models (such as OpenAI's GPT-5.5, Anthropic's Claude Sonnet/Opus, Google's Gemini 3.5 Flash, xAI's Grok 4.3, DeepSeek's V4-Pro, and Meta's Muse Spark).
 
 It is built with **pure frontend technologies (Vanilla HTML, CSS, and JS)**, meaning it is extremely lightweight, requires zero dependencies or build setups, and can be run by simply opening a file or hosted for free on GitHub Pages!
 
@@ -33,71 +33,3 @@ The project has a modular, beginner-friendly structure:
 2. `app.js` performs computations (calculates costs, compares ratings, filters search queries) and updates DOM elements.
 3. `index.html` renders the results inside containers (like `<div id="models-grid">`).
 
----
-
-## 🚀 How to Run Locally
-
-Since this project has no build step, you can run it in two ways:
-
-### Option A: Double-Click (Simplest)
-Just double-click on `index.html` to open it directly in Google Chrome, Firefox, Safari, or Microsoft Edge.
-
-### Option B: Local Dev Server (Recommended)
-Running a local server is a great habit for developers. If you have VS Code, install the **Live Server** extension, open the project folder, and click **Go Live** at the bottom right.
-Alternatively, if you have Node.js installed, run:
-```bash
-npx serve .
-```
-
----
-
-## 📦 How to Publish to GitHub & Host for Free
-
-Follow this step-by-step guide to upload your project to GitHub and publish it using **GitHub Pages** (which hosts your static site completely for free).
-
-### Step 1: Initialize Git locally
-If you haven't initialized Git in your folder yet, open your terminal (or Command Prompt) inside this project directory and run:
-```bash
-git init
-git add .
-git commit -m "Initial commit: Nebula AI Model Arena"
-```
-
-### Step 2: Create a new Repository on GitHub
-1. Log in to [GitHub](https://github.com).
-2. Click the green **New** button (or **Create repository**).
-3. Name your repository (e.g., `ai-model-comparison-arena`).
-4. Keep the repository **Public** (required for free GitHub Pages hosting).
-5. Do **NOT** initialize the repository with a README, `.gitignore`, or License (as you already have them in this folder).
-6. Click **Create repository**.
-
-### Step 3: Link and Push your local files
-GitHub will show you a page with setup commands. Copy and run the following commands in your local terminal:
-```bash
-# Rename the default branch to 'main'
-git branch -M main
-
-# Link your local Git repository to GitHub (replace URL with your repository link)
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-
-# Push your code up to GitHub
-git push -u origin main
-```
-
-### Step 4: Enable GitHub Pages
-1. Go to your repository on GitHub.
-2. Click on the **Settings** tab (gear icon at the top).
-3. In the left-hand sidebar, click on **Pages** (under the "Code and automation" section).
-4. Under **Build and deployment**, change the Source dropdown to **Deploy from a branch**.
-5. Under **Branch**, select `main` from the dropdown, choose `/ (root)`, and click **Save**.
-6. Wait 1–2 minutes. Refresh the settings page, and GitHub will provide a link at the top:
-   *👉 "Your site is live at: `https://your-username.github.io/your-repo-name/`"*
-
----
-
-## 🔧 Updating the Model Data
-To update model specs or add a new model (e.g. if new models launch):
-1. Open `models-data.js`.
-2. Duplicate one of the existing objects in the array.
-3. Edit its specs, ratings, and pricing.
-4. Save the file. The dashboard, dropdown comparison matrix, and calculator will update automatically!
