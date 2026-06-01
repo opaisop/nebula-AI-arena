@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEBULA // AI Model Arena & Comparison Hub (May 2026)</title>
+  <title>NEBULA // AI Model Arena & Comparison Hub (June 2026)</title>
   <!-- Google Fonts: Outfit (headings) and Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,14 +30,14 @@
       </div>
       <div class="logo-text">
         <h1>NEBULA</h1>
-        <span class="logo-subtitle">AI Arena &bull; May 2026 Edition</span>
+        <span class="logo-subtitle">AI Arena &bull; June 2026 Edition</span>
       </div>
     </div>
 
     <!-- Live Stats Ticker -->
     <div class="stats-ticker-container desktop-only">
       <div class="ticker-track">
-        <span class="ticker-item"><span class="ticker-bullet green"></span> Latest release: Meta Muse Spark</span>
+        <span class="ticker-item"><span class="ticker-bullet green"></span> Latest release: Claude Opus 4.8</span>
         <span class="ticker-item"><span class="ticker-bullet blue"></span> Google Gemini 3.5 Flash launched May 19</span>
         <span class="ticker-item"><span class="ticker-bullet purple"></span> DeepSeek-V4-Pro leads price performance</span>
       </div>
@@ -178,6 +178,14 @@
         </svg>
         <span>Capabilities Radar</span>
       </button>
+      <button class="tab-btn" data-target="insights">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Market Insights</span>
+      </button>
     </nav>
 
     <!-- CONTENT SECTIONS -->
@@ -216,6 +224,44 @@
     <!-- Section 1: Overview Grid -->
     <section id="panel-overview" class="tab-panel active">
       
+      <!-- Ecosystem Recommendations Board -->
+      <div class="recommendations-container glass-panel">
+        <div class="recommendations-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <h3>Ecosystem Recommendation Shortcuts</h3>
+        </div>
+        <div class="recommendations-scroll-wrapper">
+          <div class="recommendations-grid">
+            <button type="button" class="recommendation-card" data-preset="student">
+              <span class="preset-label">Students / Academic</span>
+              <span class="preset-desc">Gemini 3.1 Flash-Lite (Low Cost / Context)</span>
+            </button>
+            <button type="button" class="recommendation-card" data-preset="startup">
+              <span class="preset-label">Startups & Prototyping</span>
+              <span class="preset-desc">DeepSeek-V4-Flash & GPT-5.5 Instant</span>
+            </button>
+            <button type="button" class="recommendation-card" data-preset="coding">
+              <span class="preset-label">Elite Software Engineering</span>
+              <span class="preset-desc">Claude Sonnet 4.6 & Claude Opus 4.8</span>
+            </button>
+            <button type="button" class="recommendation-card" data-preset="budget">
+              <span class="preset-label">Best Budget Reasoning</span>
+              <span class="preset-desc">DeepSeek-V4-Pro (Ultra-cheap IQ)</span>
+            </button>
+            <button type="button" class="recommendation-card" data-preset="longcontext">
+              <span class="preset-label">Massive Context Ingestion</span>
+              <span class="preset-desc">Gemini 3.5 Flash & 3.1 Pro (2M Limit)</span>
+            </button>
+            <button type="button" class="recommendation-card" data-preset="agentic">
+              <span class="preset-label">Agentic Orchestration</span>
+              <span class="preset-desc">Claude Sonnet 4.6 (Elite tool use)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Filters and Search Toolbar -->
       <div class="toolbar-container">
         <!-- Search bar -->
@@ -337,13 +383,24 @@
         <!-- Sliders Box -->
         <div class="calculator-controls glass-panel">
           <h3>Simulated Monthly Volume</h3>
+
+          <!-- Scenario Presets -->
+          <div class="calculator-presets">
+            <span class="presets-title">Scenario Presets:</span>
+            <div class="preset-buttons-row">
+              <button type="button" class="btn btn-preset" data-input="15" data-output="8" data-cache="50">Student helper</button>
+              <button type="button" class="btn btn-preset" data-input="50" data-output="25" data-cache="65">Creator pipeline</button>
+              <button type="button" class="btn btn-preset" data-input="150" data-output="75" data-cache="80">Startup launch</button>
+              <button type="button" class="btn btn-preset" data-input="750" data-output="400" data-cache="85">Enterprise scale</button>
+            </div>
+          </div>
           
           <div class="slider-group">
             <div class="slider-labels">
               <span>Input Tokens (M)</span>
               <span id="label-input-tokens">10M</span>
             </div>
-            <input type="range" id="slider-input-tokens" min="0.1" max="100" step="0.5" value="10">
+            <input type="range" id="slider-input-tokens" min="0.1" max="1000" step="1" value="10">
             <span class="slider-hint">Prompt text sent to the model (Instructions, files, context).</span>
           </div>
 
@@ -352,7 +409,7 @@
               <span>Output Tokens (M)</span>
               <span id="label-output-tokens">5M</span>
             </div>
-            <input type="range" id="slider-output-tokens" min="0.1" max="100" step="0.5" value="5">
+            <input type="range" id="slider-output-tokens" min="0.1" max="1000" step="1" value="5">
             <span class="slider-hint">Model's generated text responses. (Typically more expensive).</span>
           </div>
 
@@ -445,6 +502,95 @@
       </div>
     </section>
 
+    <!-- Section 5: Market Insights -->
+    <section id="panel-insights" class="tab-panel">
+      <div class="section-header">
+        <h2>Ecosystem Intelligence & Market Insights</h2>
+        <p>Expert analytical perspective on the mid-2026 AI landscape, pricing trends, and technological shifts.</p>
+      </div>
+
+      <div class="insights-grid">
+        <!-- Card 1 -->
+        <div class="insight-card glass-panel">
+          <div class="insight-icon accent-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3>The DeepSeek Price Disruption</h3>
+          <p class="insight-summary">DeepSeek's V4 series MoE model architecture has forced the industry into a price-performance squeeze, making intelligence highly commoditized.</p>
+          <div class="insight-details">
+            <ul>
+              <li><strong>Open Weights Efficiency:</strong> 1.6T parameters with only ~49B active per token, yielding elite reasoning at $1.74/M input.</li>
+              <li><strong>API Squeeze:</strong> OpenAI and Anthropic are offering heavy cached input discounts (up to 90%) to remain competitive in volume.</li>
+              <li><strong>Agentic Viability:</strong> Ultra-cheap reasoning tokens make recursive agent loops economically viable for first-time builders.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="insight-card glass-panel">
+          <div class="insight-icon accent-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+          </div>
+          <h3>OpenAI's Platform & Standards Playbook</h3>
+          <p class="insight-summary">OpenAI maintains ecosystem dominance by positioning the GPT-5.5 family as the corporate enterprise standard, prioritizing API tooling over raw cost cutting.</p>
+          <div class="insight-details">
+            <ul>
+              <li><strong>API / SDK Maturity:</strong> Superior enterprise adoption, compliance standards, and SDK tooling (Assistants API, structured JSON outputs).</li>
+              <li><strong>Model Segmentation:</strong> Clear separation between standard GPT-5.5 (multimodal), GPT-5.5 Instant (real-time chat), and GPT-5.5 Thinking (deep coding & math reasoning).</li>
+              <li><strong>Native Tooling:</strong> Deep integration with Microsoft Azure, custom GPT stores, and enterprise workspace deployments.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="insight-card glass-panel">
+          <div class="insight-icon accent-orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <h3>Claude's Logic & Developer Focus</h3>
+          <p class="insight-summary">Anthropic is cementing the Claude 4 family as the ultimate tool for agentic engineering and software architecture.</p>
+          <div class="insight-details">
+            <ul>
+              <li><strong>Opus 4.8 Breakthrough:</strong> Featuring Effort Control modes and Dynamic Workflows inside Claude Code, enabling hundreds of subagents to run in parallel.</li>
+              <li><strong>Code Reliability:</strong> 4x drop in unremarked bug generation over previous iterations, achieving SWE-bench dominance.</li>
+              <li><strong>Aesthetic Control:</strong> Best-in-class spatial and visual mockup translation, converting designs to clean HTML/CSS/JS components.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="insight-card glass-panel">
+          <div class="insight-icon accent-red">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
+              <line x1="7" y1="2" x2="7" y2="22"></line>
+              <line x1="17" y1="2" x2="17" y2="22"></line>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <line x1="2" y1="7" x2="7" y2="7"></line>
+              <line x1="2" y1="17" x2="7" y2="17"></line>
+              <line x1="17" y1="17" x2="22" y2="17"></line>
+              <line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+          </div>
+          <h3>Google's Native Multimodal & Context Advantage</h3>
+          <p class="insight-summary">Google dominates in complex content analysis by supporting massive context windows (1M-2M tokens) and native audio/video handling.</p>
+          <div class="insight-details">
+            <ul>
+              <li><strong>Multi-Hour Video:</strong> Gemini 3.5 Flash and 3.1 Pro natively ingest and cross-reference audio, video, and text in a single prompt.</li>
+              <li><strong>In-Memory Codebases:</strong> 2M context allows developers to load entire medium-sized repositories into the prompt cache for needle-in-haystack recall.</li>
+              <li><strong>Consumer Reach:</strong> Tight integration with Google Workspace, Android (Gemini Nano Banana), and Vertex AI platform.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Detailed Modal for Expanded Card Info -->
@@ -469,13 +615,13 @@
         <ul>
           <li><span class="file-link">index.html</span> - Interface Structure</li>
           <li><span class="file-link">style.css</span> - Glassmorphic Theme</li>
-          <li><span class="file-link">models-data.js</span> - May 2026 Raw DB</li>
+          <li><span class="file-link">models-data.js</span> - June 2026 Raw DB</li>
           <li><span class="file-link">app.js</span> - Dynamic Engine</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Nebula AI Arena. Built for developers. Real-time specifications cached May 2026.</p>
+      <p>&copy; 2026 Nebula AI Arena. Built for developers. Real-time specifications cached June 2026.</p>
     </div>
   </footer>
 

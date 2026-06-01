@@ -1,12 +1,11 @@
 /**
  * models-data.js
  * 
- * Beginner-friendly data file containing all detailed technical specs, pricing, 
- * strengths, limitations, and performance ratings for the major AI models of May 2026.
+ * Nuanced, ecosystem-aware database containing technical specs, pricing,
+ * strengths, limitations, trend indicators, benchmark references, and multidimensional
+ * ratings for OpenAI, Anthropic, Google, DeepSeek, xAI, and Meta models.
  * 
- * This file has been updated to use a more nuanced, ecosystem-aware structure.
- * Ratings are represented as objects with score, confidence, subjectivity flag,
- * and contextual descriptions.
+ * Last updated: June 2026.
  */
 
 const AI_MODELS_DATA = [
@@ -19,6 +18,18 @@ const AI_MODELS_DATA = [
     provider: "OpenAI",
     tier: "Flagship",
     contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "Elite",
+      enterpriseAdoption: "Elite",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1352,
+      mmluPro: "92.4%",
+      sweBench: "48.6%"
+    },
     pricing: {
       input: 5.00,
       output: 30.00,
@@ -26,13 +37,13 @@ const AI_MODELS_DATA = [
     },
     releaseDate: "April 23, 2026",
     strengths: [
-      "Outstanding multi-step analytical and coding abilities",
-      "Native multimodal handling (fully integrated vision and audio)",
+      "Broad industry integration and mature API tooling",
+      "Native multimodal handling (integrated vision and audio processing)",
       "High reliability on long-context structures (1M window)"
     ],
     weaknesses: [
-      "Pricing doubles for prompts exceeding 272K active tokens",
-      "Noticeably slower than GPT-5.5 Instant",
+      "Input costs double for prompts exceeding 272K active tokens",
+      "Slower response times than GPT-5.5 Instant",
       "Higher base price per million tokens than open weights competitors"
     ],
     bestUseCases: [
@@ -55,6 +66,18 @@ const AI_MODELS_DATA = [
     provider: "OpenAI",
     tier: "Fast",
     contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "rising",
+    ecosystem: {
+      apiMaturity: "Elite",
+      enterpriseAdoption: "High",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1224,
+      mmluPro: "81.2%",
+      sweBench: "22.5%"
+    },
     pricing: {
       input: 0.50,
       output: 2.00,
@@ -91,6 +114,18 @@ const AI_MODELS_DATA = [
     provider: "OpenAI",
     tier: "Reasoning",
     contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "rising",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "Medium",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1378,
+      mmluPro: "94.6%",
+      sweBench: "52.8%"
+    },
     pricing: {
       input: 5.00,
       output: 30.00,
@@ -126,38 +161,50 @@ const AI_MODELS_DATA = [
   // ANTHROPIC MODELS
   // ==========================================
   {
-    id: "claude-opus-47",
-    name: "Claude Opus 4.7",
+    id: "claude-opus-48",
+    name: "Claude Opus 4.8",
     provider: "Anthropic",
     tier: "Flagship",
-    contextWindow: "200K tokens",
+    contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "High",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1368,
+      mmluPro: "93.8%",
+      sweBench: "51.8%"
+    },
     pricing: {
       input: 5.00,
       output: 25.00,
       cachedInput: 0.50
     },
-    releaseDate: "Early 2026",
+    releaseDate: "May 28, 2026",
     strengths: [
-      "Unmatched nuances in reading comprehension & tone",
-      "Advanced agentic orchestration capabilities",
-      "Highly logical, long-form structured output formatting"
+      "Effort Control setting for deep logic and reasoning tuning",
+      "Dynamic Workflows support for parallel subagent orchestration",
+      "4x less likely to allow unremarked code bugs than prior versions"
     ],
     weaknesses: [
       "Highest pricing tier on the market in 2026",
-      "Noticeably slower generation speed than Sonnet/Flash",
-      "Revised tokenizer can increase effective token count by ~35%"
+      "Noticeably slower generation speed than Sonnet/Flash (unless using Fast Mode)",
+      "Fast Mode ($10/$50) is faster but remains highly expensive"
     ],
     bestUseCases: [
       "Drafting complex contracts and literary texts",
       "Enterprise workflow planning & multi-agent systems",
-      "Deep qualitative research and synthesis"
+      "Deep qualitative research and code verification"
     ],
     ratings: {
-      coding: { score: 9.8, confidence: "Medium", isSubjective: true, note: "Superb for system architecture and large-context codebase logic. Slower loop limits fast iterations." },
-      reasoning: { score: 9.8, confidence: "High", isSubjective: false, note: "Pinnacle of multi-step logical planning and contextual reading." },
+      coding: { score: 9.8, confidence: "High", isSubjective: false, note: "Pinnacle of multi-file agentic coding and bug checking." },
+      reasoning: { score: 9.9, confidence: "High", isSubjective: false, note: "Top-tier logical planning and contextual reading." },
       creative: { score: 9.9, confidence: "Medium", isSubjective: true, note: "Exceptional writing flow, tone control, and empathetic dialog." },
-      speed: { score: 6.8, confidence: "High", isSubjective: false, note: "Heavy computation overhead leads to moderate output speeds." },
-      multimodal: { score: 9.2, confidence: "High", isSubjective: false, note: "Strong layout parser, specifically for PDFs and charts." }
+      speed: { score: 6.8, confidence: "High", isSubjective: false, note: "Heavy computation overhead leads to moderate output speeds (unless in Fast Mode)." },
+      multimodal: { score: 9.4, confidence: "High", isSubjective: false, note: "Strong layout parser, specifically for PDFs, charts, and diagrams." }
     },
     badgeColor: "#d9775f"
   },
@@ -167,6 +214,18 @@ const AI_MODELS_DATA = [
     provider: "Anthropic",
     tier: "Flagship",
     contextWindow: "200K tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "Elite",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1344,
+      mmluPro: "91.8%",
+      sweBench: "49.5%"
+    },
     pricing: {
       input: 3.00,
       output: 15.00,
@@ -179,8 +238,8 @@ const AI_MODELS_DATA = [
       "Generates clean, well-documented, modern code"
     ],
     weaknesses: [
-      "Priced higher than OpenAI GPT-4o and xAI Grok 4.3",
-      "Can get stubborn on safety guardrails compared to open models",
+      "Priced higher than OpenAI GPT-5.5 and xAI Grok 4.3",
+      "Can get stubborn on safety guardrails compared to open weights models",
       "Strict context limits on API under heavy load spikes"
     ],
     bestUseCases: [
@@ -203,6 +262,18 @@ const AI_MODELS_DATA = [
     provider: "Anthropic",
     tier: "Fast",
     contextWindow: "200K tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "High",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1218,
+      mmluPro: "79.8%",
+      sweBench: "18.4%"
+    },
     pricing: {
       input: 1.00,
       output: 5.00,
@@ -215,7 +286,7 @@ const AI_MODELS_DATA = [
       "Highly accurate formatting and JSON output support"
     ],
     weaknesses: [
-      "Significantly more expensive than GPT-4o mini or DeepSeek-V4-Flash",
+      "Significantly more expensive than GPT-5.5 Instant or DeepSeek-V4-Flash",
       "Lacks deep multi-step coding/math reasoning",
       "Lacks premium multimodal video capabilities"
     ],
@@ -242,7 +313,19 @@ const AI_MODELS_DATA = [
     name: "Gemini 3.5 Flash",
     provider: "Google",
     tier: "Fast",
-    contextWindow: "2M tokens",
+    contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "rising",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "High",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1290,
+      mmluPro: "86.5%",
+      sweBench: "34.2%"
+    },
     pricing: {
       input: 1.50,
       output: 9.00,
@@ -250,7 +333,7 @@ const AI_MODELS_DATA = [
     },
     releaseDate: "May 19, 2026",
     strengths: [
-      "Massive 2 Million token context window for rapid parsing",
+      "Spacious 1 Million token context window for rapid parsing",
       "Blazing fast speeds with high efficiency",
       "Excellent video and audio processing capabilities"
     ],
@@ -279,6 +362,18 @@ const AI_MODELS_DATA = [
     provider: "Google",
     tier: "Flagship",
     contextWindow: "2M tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "Elite",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1338,
+      mmluPro: "90.2%",
+      sweBench: "45.1%"
+    },
     pricing: {
       input: 2.00,
       output: 12.00,
@@ -315,6 +410,18 @@ const AI_MODELS_DATA = [
     provider: "Google",
     tier: "Fast",
     contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "High",
+      enterpriseAdoption: "High",
+      openSourceFriendliness: "Low"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1198,
+      mmluPro: "74.2%",
+      sweBench: "12.8%"
+    },
     pricing: {
       input: 0.25,
       output: 1.50,
@@ -354,13 +461,25 @@ const AI_MODELS_DATA = [
     name: "DeepSeek-V4-Pro",
     provider: "DeepSeek",
     tier: "Reasoning",
-    contextWindow: "128K tokens",
-    pricing: {
-      input: 0.435,
-      output: 0.87,
-      cachedInput: 0.0036
+    contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "rising",
+    ecosystem: {
+      apiMaturity: "Medium",
+      enterpriseAdoption: "Medium",
+      openSourceFriendliness: "Elite"
     },
-    releaseDate: "Late 2025 / Early 2026",
+    benchmarks: {
+      chatbotArenaElo: 1342,
+      mmluPro: "92.8%",
+      sweBench: "50.4%"
+    },
+    pricing: {
+      input: 1.74,
+      output: 3.48,
+      cachedInput: 0.0174
+    },
+    releaseDate: "April 24, 2026",
     strengths: [
       "Incredible reasoning and coding at a fraction of competitors' costs",
       "Ultra-cheap input cache hit rates (99% discount)",
@@ -369,7 +488,7 @@ const AI_MODELS_DATA = [
     weaknesses: [
       "Lack of native advanced audio/video processing",
       "API stability can suffer during high traffic periods",
-      "Smaller context window (128K) compared to Gemini (2M)"
+      "Private API setup required for general production integration"
     ],
     bestUseCases: [
       "Complex coding pipelines and automated PR reviews",
@@ -390,7 +509,19 @@ const AI_MODELS_DATA = [
     name: "DeepSeek-V4-Flash",
     provider: "DeepSeek",
     tier: "Fast",
-    contextWindow: "128K tokens",
+    contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "rising",
+    ecosystem: {
+      apiMaturity: "Medium",
+      enterpriseAdoption: "Medium",
+      openSourceFriendliness: "Elite"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1205,
+      mmluPro: "78.5%",
+      sweBench: "15.6%"
+    },
     pricing: {
       input: 0.14,
       output: 0.28,
@@ -405,7 +536,7 @@ const AI_MODELS_DATA = [
     weaknesses: [
       "Weak multi-modal output support",
       "Unsuitable for highly complicated code architectures",
-      "Lacks granular system prompt tailoring"
+      "Requires custom API endpoint or self-hosting for production scale"
     ],
     bestUseCases: [
       "Microservice logs parsing and indexing",
@@ -431,6 +562,18 @@ const AI_MODELS_DATA = [
     provider: "xAI",
     tier: "Flagship",
     contextWindow: "1M tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "Medium",
+      enterpriseAdoption: "Medium",
+      openSourceFriendliness: "Medium"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1320,
+      mmluPro: "89.6%",
+      sweBench: "42.5%"
+    },
     pricing: {
       input: 1.25,
       output: 2.50,
@@ -467,6 +610,18 @@ const AI_MODELS_DATA = [
     provider: "xAI",
     tier: "Fast",
     contextWindow: "2M tokens",
+    lastUpdated: "June 2026",
+    trend: "stable",
+    ecosystem: {
+      apiMaturity: "Medium",
+      enterpriseAdoption: "Medium",
+      openSourceFriendliness: "Medium"
+    },
+    benchmarks: {
+      chatbotArenaElo: 1208,
+      mmluPro: "76.4%",
+      sweBench: "14.8%"
+    },
     pricing: {
       input: 0.20,
       output: 0.50,
@@ -506,13 +661,25 @@ const AI_MODELS_DATA = [
     name: "Muse Spark",
     provider: "Meta",
     tier: "Flagship",
-    contextWindow: "1M tokens",
-    pricing: {
-      input: 1.50,
-      output: 4.50,
-      cachedInput: 0.15
+    contextWindow: "260K tokens",
+    lastUpdated: "June 2026",
+    trend: "rising",
+    ecosystem: {
+      apiMaturity: "Medium",
+      enterpriseAdoption: "High",
+      openSourceFriendliness: "Medium"
     },
-    releaseDate: "May 2026",
+    benchmarks: {
+      chatbotArenaElo: 1334,
+      mmluPro: "90.5%",
+      sweBench: "44.8%"
+    },
+    pricing: {
+      input: 0.00,
+      output: 0.00,
+      cachedInput: 0.00
+    },
+    releaseDate: "April 8, 2026",
     strengths: [
       "Free integrated consumer tier across WhatsApp, Instagram, Messenger",
       "High-grade agentic workflow execution and tool use",
@@ -521,7 +688,7 @@ const AI_MODELS_DATA = [
     weaknesses: [
       "Currently closed-source proprietary model strategy from Meta MSL",
       "Developer API in private preview only",
-      "Stricter guidelines for commercial integrations"
+      "Commercial pricing and SLA structures not yet finalized"
     ],
     bestUseCases: [
       "Personal assistance and virtual companions",

@@ -22,7 +22,8 @@ const state = {
     cacheHitRate: 40  // Percentage
   },
   radarMetric: 'coding', // Current leaderboard metric
-  tourOpen: false
+  tourOpen: false,
+  activePreset: null // Active recommendation preset filter
 };
 
 // ==========================================
@@ -162,21 +163,29 @@ function setupEventListeners() {
   // Filters & Search logic (Overview)
   DOM.searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value.toLowerCase().trim();
+    state.activePreset = null;
+    document.querySelectorAll('.recommendation-card').forEach(c => c.classList.remove('active'));
     filterAndRenderModels();
   });
 
   DOM.filterProvider.addEventListener('change', (e) => {
     state.filterProvider = e.target.value;
+    state.activePreset = null;
+    document.querySelectorAll('.recommendation-card').forEach(c => c.classList.remove('active'));
     filterAndRenderModels();
   });
 
   DOM.filterTier.addEventListener('change', (e) => {
     state.filterTier = e.target.value;
+    state.activePreset = null;
+    document.querySelectorAll('.recommendation-card').forEach(c => c.classList.remove('active'));
     filterAndRenderModels();
   });
 
   DOM.sortBy.addEventListener('change', (e) => {
     state.sortBy = e.target.value;
+    state.activePreset = null;
+    document.querySelectorAll('.recommendation-card').forEach(c => c.classList.remove('active'));
     filterAndRenderModels();
   });
 
@@ -245,6 +254,64 @@ function setupEventListeners() {
   // Copy comparisons & costs listeners
   DOM.copyCompareBtn.addEventListener('click', copyComparisonToClipboard);
   DOM.copyCostsBtn.addEventListener('click', copyCostsToClipboard);
+
+  // Preset scenario buttons inside calculator
+  const presetButtons = document.querySelectorAll('.btn-preset');
+  presetButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all preset buttons
+      presetButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const inputVal = parseFloat(btn.getAttribute('data-input'));
+      const outputVal = parseFloat(btn.getAttribute('data-output'));
+      const cacheVal = parseInt(btn.getAttribute('data-cache'));
+
+      // Update state
+      state.calculator.inputTokens = inputVal;
+      state.calculator.outputTokens = outputVal;
+      state.calculator.cacheHitRate = cacheVal;
+
+      // Update UI elements
+      DOM.sliderInputTokens.value = inputVal;
+      DOM.labelInputTokens.textContent = `${inputVal}M`;
+
+      DOM.sliderOutputTokens.value = outputVal;
+      DOM.labelOutputTokens.textContent = `${outputVal}M`;
+
+      DOM.sliderCacheRate.value = cacheVal;
+      DOM.labelCacheRate.textContent = `${cacheVal}%`;
+
+      // Recalculate
+      calculateAndRenderCosts();
+    });
+  });
+
+  // Recommendation shortcuts inside overview
+  const recommendationCards = document.querySelectorAll('.recommendation-card');
+  recommendationCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const presetId = card.getAttribute('data-preset');
+      
+      // If clicking already active preset, clear it
+      if (state.activePreset === presetId) {
+        state.activePreset = null;
+        card.classList.remove('active');
+      } else {
+        recommendationCards.forEach(c => c.classList.remove('active'));
+        state.activePreset = presetId;
+        card.classList.add('active');
+      }
+
+      // Reset dropdown filters to "all" to avoid conflicting filters
+      DOM.filterProvider.value = 'all';
+      DOM.filterTier.value = 'all';
+      state.filterProvider = 'all';
+      state.filterTier = 'all';
+      
+      filterAndRenderModels();
+    });
+  });
 }
 
 // ==========================================
@@ -290,6 +357,20 @@ function filterAndRenderModels() {
   if (!window.AI_MODELS_DATA) return;
 
   let filtered = [...window.AI_MODELS_DATA];
+
+  // 0. Active recommendation preset filter
+  if (state.activePreset) {
+    const presetMappings = {
+      student: ['gemini-31-flash-lite'],
+      startup: ['deepseek-v4-flash', 'gpt-55-instant'],
+      coding: ['claude-sonnet-46', 'claude-opus-48'],
+      budget: ['deepseek-v4-pro'],
+      longcontext: ['gemini-35-flash', 'gemini-31-pro'],
+      agentic: ['claude-sonnet-46']
+    };
+    const allowedIds = presetMappings[state.activePreset] || [];
+    filtered = filtered.filter(model => allowedIds.includes(model.id));
+  }
 
   // 1. Search Query filter
   if (state.searchQuery) {
@@ -504,6 +585,68 @@ function updateCompareBasketUI() {
 // ==========================================
 // Head-to-Head Compare Logic
 // ==========================================
+function generateTradeoffCommentary(modelA, modelB) {
+  // Check for specific interesting comparisons
+  const pairKey = [modelA.id, modelB.id].sort().join('__');
+  
+  const specializedCommentaries = {
+    'claude-opus-48__gpt-55-thinking': 
+      "<strong>Ecosystem Tradeoff:</strong> Claude Opus 4.8 is built for complex, long-running multi-file agentic engineering workflows with its Effort Control and Dynamic Workflows. OpenAI's GPT-5.5 Thinking is optimized for linear, deep chain-of-thought mathematical derivation and logic verification. Opus 4.8 is preferred for software developers using Claude Code, while GPT-5.5 Thinking is unmatched in standalone algorithmic problems.",
+      
+    'deepseek-v4-pro__gpt-55-thinking':
+      "<strong>Ecosystem Tradeoff:</strong> DeepSeek-V4-Pro represents a disruptive cost alternative, offering near-parity coding and logical reasoning at a 3x pricing discount ($1.74/$3.48 vs $5.00/$30.00). However, GPT-5.5 Thinking features a more mature API ecosystem, lower latency on standard outputs, and superior enterprise compliance structures.",
+      
+    'claude-sonnet-46__gemini-35-flash':
+      "<strong>Ecosystem Tradeoff:</strong> Gemini 3.5 Flash is designed for speed and large context retrieval, boasting a 1M token window with native video/audio ingestion. Claude Sonnet 4.6 has a smaller 200K window and slower response speed, but it produces higher-quality code files and UI-to-code translations, making it the choice for software engineering loops.",
+      
+    'claude-sonnet-46__deepseek-v4-pro':
+      "<strong>Ecosystem Tradeoff:</strong> Claude Sonnet 4.6 offers superior tools integration, UI translation, and clean styling output. DeepSeek-V4-Pro offers deeper multi-step reasoning steps and math capability, and is significantly cheaper, but has higher input latency and less stable API endpoints under heavy global load.",
+      
+    'gemini-35-flash__gpt-55-instant':
+      "<strong>Ecosystem Tradeoff:</strong> Both are elite fast-tier models. GPT-5.5 Instant is slightly faster and cheaper for general short-prompt customer routing. Gemini 3.5 Flash is slightly more expensive but offers a much larger 1M context window and natively ingests raw video/audio inputs, making it far more capable for multimodal analytics.",
+      
+    'claude-opus-48__deepseek-v4-pro':
+      "<strong>Ecosystem Tradeoff:</strong> Claude Opus 4.8 features rich prose styling, effort scaling parameters, and advanced multi-agent planning. DeepSeek-V4-Pro matches Opus closely in standard programming syntax but is available at a fraction of the cost. However, DeepSeek lacks Opus's nuanced reading comprehension and long-context formatting reliability.",
+
+    'muse-spark__claude-sonnet-46':
+      "<strong>Ecosystem Tradeoff:</strong> Meta's Muse Spark is a closed-source consumer flagship featuring friendly social tone and free chat integration on Meta's social platforms. Claude Sonnet 4.6 is a strict developer model, lacking consumer integrations but featuring elite API documentation, system controls, and programming accuracy."
+  };
+
+  if (specializedCommentaries[pairKey]) {
+    return specializedCommentaries[pairKey];
+  }
+
+  // Fallback dynamic comparison
+  const priceA = modelA.pricing.input + modelA.pricing.output;
+  const priceB = modelB.pricing.input + modelB.pricing.output;
+  
+  let priceNote = "";
+  if (Math.abs(priceA - priceB) > 0.1) {
+    const cheaper = priceA < priceB ? modelA : modelB;
+    const expensive = priceA < priceB ? modelB : modelA;
+    const ratio = (priceB === 0 || priceA === 0) ? "infinite" : (cheaper === modelA ? priceB / priceA : priceA / priceB).toFixed(1);
+    priceNote = `<strong>Cost:</strong> ${cheaper.name} is highly value-efficient, priced up to ${ratio}x cheaper than ${expensive.name}. `;
+  } else {
+    priceNote = `<strong>Cost:</strong> Both models have similar pricing structures. `;
+  }
+
+  let capabilityNote = "";
+  const codingDiff = modelA.ratings.coding.score - modelB.ratings.coding.score;
+  const reasoningDiff = modelA.ratings.reasoning.score - modelB.ratings.reasoning.score;
+  
+  if (Math.abs(codingDiff) > 0.5) {
+    const stronger = codingDiff > 0 ? modelA : modelB;
+    capabilityNote += `<strong>Capabilities:</strong> ${stronger.name} holds a noticeable edge in coding tasks. `;
+  } else if (Math.abs(reasoningDiff) > 0.5) {
+    const stronger = reasoningDiff > 0 ? modelA : modelB;
+    capabilityNote += `<strong>Capabilities:</strong> ${stronger.name} outperforms in complex reasoning. `;
+  } else {
+    capabilityNote += `<strong>Capabilities:</strong> These models show near parity in raw benchmarks, with differences lying mainly in provider API ecosystems. `;
+  }
+
+  return `<strong>Dynamic Tradeoff Analysis:</strong><br>${priceNote}<br>${capabilityNote}`;
+}
+
 function renderComparisonTable() {
   const idA = DOM.compareSelectA.value;
   const idB = DOM.compareSelectB.value;
@@ -662,6 +805,18 @@ function renderComparisonTable() {
         </tr>
       </tbody>
     </table>
+
+    <div class="h2h-commentary-box glass-panel" style="margin-top: 24px; padding: 20px; border-left: 4px solid var(--accent); background: var(--bg-secondary);">
+      <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-size: 15px; display: flex; align-items: center; gap: 8px; color: var(--text-primary);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Ecosystem Tradeoff Commentary
+      </h4>
+      <p style="font-size: 13.5px; line-height: 1.5; color: var(--text-secondary);">
+        ${generateTradeoffCommentary(modelA, modelB)}
+      </p>
+    </div>
   `;
 }
 
